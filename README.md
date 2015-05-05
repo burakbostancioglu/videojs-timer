@@ -33,6 +33,12 @@ Type: `string`
 P.S:
 If your video is not mutiple of your interval, you will get one tick at the end.
 
+### Testing
+
+To install expected modules, from the command line run
+>npm link
+
+Then run tests from your browser
 
 ## Release History
 
