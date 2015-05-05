@@ -28,7 +28,7 @@ Type: `integer`
 
 #### event_name(required)
 Desc: The name of the event for every tick
-Type: `integer`
+Type: `string`
 
 P.S:
 If your video is not mutiple of your interval, you will get one tick at the end.
