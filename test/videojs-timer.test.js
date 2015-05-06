@@ -98,4 +98,15 @@
       player.trigger("timeupdate");
   });
 
+  test('check_no_event_for_negative', function(){
+      qunit.expect(0);
+      player.trigger("play");
+      player.currentTime = function (){return -14};
+      callback = function(e){
+          ok(false, 'Should not get here');
+      }
+      document.addEventListener("test", callback);
+      player.trigger("timeupdate");
+  });
+
 })(window, window.videojs, window.QUnit);
