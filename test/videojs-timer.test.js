@@ -98,4 +98,4 @@
       player.trigger("timeupdate");
   });
 
-})(global, global.videojs, global.QUnit);
+})(window, window.videojs, window.QUnit);
