@@ -10,7 +10,7 @@ Once you've added the plugin script to your page, you can use it with any video:
 <script src="video.js"></script>
 <script src="videojs-timer.js"></script>
 <script>
-  videojs(document.querySelector('video')).timer("interval":15,"event_name":"test");
+  videojs(document.querySelector('video')).timer({"interval":15,"event_name":"test"});
 </script>
 ```
 
