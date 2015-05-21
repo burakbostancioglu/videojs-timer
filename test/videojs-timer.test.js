@@ -1,7 +1,7 @@
 /*! videojs-timer - v0.0.0 - 2015-5-3
  * Copyright (c) 2015 burakbostancioglu
  * Licensed under the Apache-2.0 license. */
-(function(window, videojs, qunit, sinon)  {
+(function(window, videojs, qunit)  {
   'use strict';
 
   var realIsHtmlSupported,
@@ -39,7 +39,6 @@
       // create a video element
       var video = document.createElement('video');
       document.querySelector('#qunit-fixture').appendChild(video);
-      clock = sinon.useFakeTimers();
       // create a video.js player
       player = videojs(video);
       player.duration = function (){return 46.6};
@@ -63,28 +62,51 @@
         equal(15,e.detail.position);  
       }
       document.addEventListener("test", callback);
-      clock.tick(4*1000);
       player.trigger("timeupdate");
   });
+
   test('check_event_last_block', function(){
-      player.currentTime = function (){return 46};
+      player.currentTime = function (){return 44};
       player.trigger("play");
       callback = function(e){
         equal(45,e.detail.position);  
       }
       document.addEventListener("test", callback);
-      clock.tick(4*1000);
       player.trigger("timeupdate");
   });
-    test('check_event_on_end', function(){
+
+  test('check_event_on_end', function(){
       player.currentTime = function (){return 46.6};
       player.trigger("play");
       callback = function(e){
         equal(46.6, e.detail.position);  
       }
       document.addEventListener("test", callback);
-      clock.tick(4*1000);
       player.trigger("ended");
   });
 
-})(window, window.videojs, window.QUnit, window.sinon);
+  test('check_event_only_once_per_position', function(){
+      qunit.expect(0);
+      player.trigger("play");
+      player.currentTime = function (){return 14};
+      player.trigger("timeupdate");
+      callback = function(e){
+          ok(false, 'Should not get here');
+      }
+      document.addEventListener("test", callback);
+      player.currentTime = function (){return 15};
+      player.trigger("timeupdate");
+  });
+
+  test('check_no_event_for_negative', function(){
+      qunit.expect(0);
+      player.trigger("play");
+      player.currentTime = function (){return -14};
+      callback = function(e){
+          ok(false, 'Should not get here');
+      }
+      document.addEventListener("test", callback);
+      player.trigger("timeupdate");
+  });
+
+})(window, window.videojs, window.QUnit);

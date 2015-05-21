@@ -10,7 +10,7 @@ Once you've added the plugin script to your page, you can use it with any video:
 <script src="video.js"></script>
 <script src="videojs-timer.js"></script>
 <script>
-  videojs(document.querySelector('video')).timer("interval":15,"event_name":"test");
+  videojs(document.querySelector('video')).timer({"interval":15,"event_name":"test"});
 </script>
 ```
 
@@ -33,6 +33,12 @@ Type: `string`
 P.S:
 If your video is not mutiple of your interval, you will get one tick at the end.
 
+### Testing
+
+To install expected modules, from the command line run
+>npm link
+
+Then run tests from your browser
 
 ## Release History
 
